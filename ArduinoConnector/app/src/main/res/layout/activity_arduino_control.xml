@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArduinoControl">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="LED Controller "
+        android:textColor="#f44336"
+        android:textSize="23dp" />
+
+
+    <Button
+        android:id="@+id/on_btn"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/rounded_button"
+        android:fadingEdge="none"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Led On"
+        android:textColor="#212121"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/off_btn"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/rounded_button"
+        android:fadingEdge="none"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Led Off"
+        android:textColor="#212121"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/dis_btn"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/rounded_button"
+        android:fadingEdge="none"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Disconnect"
+        android:textColor="#212121"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/abt_btn"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/dis_btn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="about"
+        android:textColor="#212121"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/dataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/label"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="110dp"
+        android:text="Send Data" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="106dp"
+        android:text="TextView"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/instructionField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="180dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="230dp"
+        android:layout_toStartOf="@+id/dataButton"
+        android:text="Enter Instruction:" />
+
+</RelativeLayout>
