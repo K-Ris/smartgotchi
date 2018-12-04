@@ -32,7 +32,7 @@ int testGraphic[24] = { 0x0000, 0x0000, 0x0000, 0x0000, 0x07, 0x0000,
                         0x0000, 0x07FF, 0x0000, 0x07FF, 0x0000, 0x0000
                       };
 
-const int testKitten[] = {
+const unsigned int testKitten[]PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -159,9 +159,11 @@ void setup()
 
   tft.fillRoundRect(25, 90, 78, 60, 8, ST77XX_WHITE);
 
-  drawGraphic(50, 120, 5, testGraphic, 23);
+  //drawGraphic(50, 120, 5, testGraphic, 23);
 
   //drawGraphic(50, 50, 79, testKitten, 6399);
+
+  drawBitmap(25, 80, testKitten, 80, 80, ST77XX_BLACK);
 
 
   //setColor(255, 0, 0);  // red
@@ -303,6 +305,20 @@ void drawGraphic(int posx, int posy, int sizex, int content[], int contentSize) 
       offsetx++;
     }
 
+  }
+}
+
+void drawBitmap(int16_t x, int16_t y,const uint16_t *bitmap, int16_t w, int16_t h, uint16_t color) {
+
+  int16_t i, j, byteWidth = (w + 7) / 8;
+  uint8_t byte;
+
+  for(j=0; j<h; j++) {
+    for(i=0; i<w; i++) {
+      if(i & 7) byte <<= 1;
+      else      byte   = pgm_read_byte(bitmap + j * byteWidth + i / 8);
+      if(byte & 0x80) tft.drawPixel(x+i, y+j, color);
+    }
   }
 }
 
