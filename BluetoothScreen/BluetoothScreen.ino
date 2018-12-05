@@ -146,16 +146,16 @@ void setup()
   //tft.drawRect(0, 0, 128, 160, ST7735_BLUE);
 
   // setTextSize(groesse);
-  tft.setTextSize(1);
+  tft.setTextSize(3);
 
   // setCursor(links,oben);
-  tft.setCursor(30, 10);
+  tft.setCursor(20, 30);
 
   // setTextColor(farbe);
   tft.setTextColor(ST7735_WHITE);
 
   // print(text);
-  tft.print("Welcome World!");
+  tft.print("23:08");
 
   tft.fillRoundRect(25, 90, 78, 60, 8, ST77XX_WHITE);
 
