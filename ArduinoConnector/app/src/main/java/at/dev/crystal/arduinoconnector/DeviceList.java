@@ -66,24 +66,30 @@ public class DeviceList extends AppCompatActivity {
 
     private void pairedDevicesList()
     {
-        pairedDevices = myBluetooth.getBondedDevices();
-        ArrayList list = new ArrayList();
+        try{
+            pairedDevices = myBluetooth.getBondedDevices();
+            ArrayList list = new ArrayList();
 
-        if (pairedDevices.size()>0)
-        {
-            for(BluetoothDevice bt : pairedDevices)
+            if (pairedDevices.size()>0)
             {
-                list.add(bt.getName() + "\n" + bt.getAddress()); //Get the device's name and the address
+                for(BluetoothDevice bt : pairedDevices)
+                {
+                    list.add(bt.getName() + "\n" + bt.getAddress()); //Get the device's name and the address
+                }
             }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "No Paired Bluetooth Devices Found.", Toast.LENGTH_LONG).show();
+            }
+
+            final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+            devicelist.setAdapter(adapter);
+            devicelist.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
         }
-        else
-        {
-            Toast.makeText(getApplicationContext(), "No Paired Bluetooth Devices Found.", Toast.LENGTH_LONG).show();
+        catch (Exception e){
+
         }
 
-        final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-        devicelist.setAdapter(adapter);
-        devicelist.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
 
     }
 

@@ -44,7 +44,6 @@ public class ArduinoControl extends AppCompatActivity {
         On = (Button)findViewById(R.id.on_btn);
         Off = (Button)findViewById(R.id.off_btn);
         Discnt = (Button)findViewById(R.id.dis_btn);
-        Abt = (Button)findViewById(R.id.abt_btn);
         Data = (Button)findViewById(R.id.dataButton);
         instruction = (EditText)findViewById(R.id.instructionField);
 
@@ -115,6 +114,13 @@ public class ArduinoControl extends AppCompatActivity {
         if (btSocket!=null)
         {
             sendData("on");
+        }
+    }
+
+    private void startUp(){
+        if (btSocket!=null)
+        {
+            sendData("startup");
         }
     }
 
@@ -230,6 +236,8 @@ public class ArduinoControl extends AppCompatActivity {
             {
                 msg("Connected.");
                 isBtConnected = true;
+
+                startUp();
             }
             progress.dismiss();
         }

@@ -31,8 +31,8 @@ int testGraphic[24] = { 0x0000, 0x0000, 0x0000, 0x0000, 0x07, 0x0000,
                         0x0000, 0x07FF, 0x0000, 0x07FF, 0x0000, 0x0000,
                         0x0000, 0x07FF, 0x0000, 0x07FF, 0x0000, 0x0000
                       };
-
-const unsigned int testKitten[]PROGMEM = {
+/*
+  const unsigned int testKitten[]PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -113,7 +113,8 @@ const unsigned int testKitten[]PROGMEM = {
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-};
+  };
+*/
 
 char data = 0;                //Variable for storing received data
 String instruction = "";
@@ -146,27 +147,35 @@ void setup()
   //tft.drawRect(0, 0, 128, 160, ST7735_BLUE);
 
   // setTextSize(groesse);
-  tft.setTextSize(3);
+  tft.setTextSize(1);
 
   // setCursor(links,oben);
-  tft.setCursor(20, 30);
+  tft.setCursor(20, 120);
 
   // setTextColor(farbe);
   tft.setTextColor(ST7735_WHITE);
 
   // print(text);
-  tft.print("23:08");
+  tft.print("Not Connected!");
 
-  tft.fillRoundRect(25, 90, 78, 60, 8, ST77XX_WHITE);
+/*
+  tft.fillRoundRect(80, 25, 20, 20, 2, ST77XX_WHITE);
+  tft.fillRoundRect(25, 25, 20, 20, 2, ST77XX_WHITE);
+  tft.fillRoundRect(20, 80, 85, 20, 2, ST77XX_WHITE);
+*/
+
+  //tft.fillRoundRect(25, 90, 78, 60, 8, ST77XX_WHITE);
 
   //drawGraphic(50, 120, 5, testGraphic, 23);
 
   //drawGraphic(50, 50, 79, testKitten, 6399);
 
-  drawBitmap(25, 80, testKitten, 80, 80, ST77XX_BLACK);
+  //drawBitmap(25, 80, testKitten, 80, 80, ST77XX_BLACK);
 
 
   //setColor(255, 0, 0);  // red
+
+  //startUp();
 
 }
 void loop()
@@ -214,7 +223,7 @@ void loop()
 
     if (data == ';') {
       //close instruction
-      fillTextString(instruction);
+      //fillTextString(instruction);
       instruction = "";
     }
     else {
@@ -227,7 +236,7 @@ void loop()
       //digitalWrite(TFT_PIN_LED, HIGH);
       digitalWrite(MESSAGE_LED, HIGH);
 
-      fillTextChar(data);
+      //fillTextChar(data);
     }
     else if (instruction.equals("off"))      //Checks whether value of data is equal to 0
     {
@@ -235,7 +244,17 @@ void loop()
       //digitalWrite(TFT_PIN_LED, LOW);
       digitalWrite(MESSAGE_LED, LOW);
 
-      fillTextChar(data);
+      //fillTextChar(data);
+    }
+    else if (instruction.equals("startup"))      //Checks whether value of data is equal to 0
+    {
+      //digitalWrite(MESSAGE_LED, LOW);   //If value is 0 then LED turns OFF
+      //digitalWrite(TFT_PIN_LED, LOW);
+      //digitalWrite(MESSAGE_LED, LOW);
+
+      startUp();
+
+      //fillTextChar(data);
     }
   }
 
@@ -284,7 +303,8 @@ void changeBackgroundColor(char color) {
     tft.fillScreen(ST7735_GREEN);
   }
   else if (color == 'b') {
-    tft.fillScreen(ST7735_BLUE);
+    //tft.fillScreen(ST7735_BLUE);
+    startUp();
   }
 }
 
@@ -308,16 +328,73 @@ void drawGraphic(int posx, int posy, int sizex, int content[], int contentSize) 
   }
 }
 
-void drawBitmap(int16_t x, int16_t y,const uint16_t *bitmap, int16_t w, int16_t h, uint16_t color) {
+void startUp() {
+
+  tft.fillScreen(ST7735_BLACK);
+  
+  tft.fillRect(0, 120, 150, 50, ST77XX_BLACK);
+
+  // setTextSize(groesse);
+  tft.setTextSize(1);
+
+  // setCursor(links,oben);
+  tft.setCursor(20, 120);
+
+  // setTextColor(farbe);
+  tft.setTextColor(ST7735_WHITE);
+
+  // print(text);
+  tft.print("Connecting...");
+
+
+/*
+  tft.fillRoundRect(80, 25, 20, 20, 2, ST77XX_WHITE);
+  tft.fillRoundRect(25, 25, 20, 20, 2, ST77XX_WHITE);
+  tft.fillRoundRect(20, 80, 85, 20, 2, ST77XX_WHITE);
+
+  int i = 0;
+
+  for (i = 0; i < 56; i++) {
+    tft.fillRect(80, 25 + i - 1, 20, 2,  ST77XX_BLACK);
+    tft.fillRect(25, 25 + i - 1, 20, 2,  ST77XX_BLACK);
+
+    tft.fillRect(80, 25 + i, 20, 20, ST77XX_WHITE);
+    tft.fillRect(25, 25 + i, 20, 20, ST77XX_WHITE);
+
+    delay(5);
+
+  }
+  */
+
+  delay (1000);
+
+  tft.fillRect(0, 120, 150, 50, ST77XX_BLACK);
+
+  // setTextSize(groesse);
+  tft.setTextSize(1);
+
+  // setCursor(links,oben);
+  tft.setCursor(20, 120);
+
+  // setTextColor(farbe);
+  tft.setTextColor(ST7735_WHITE);
+
+  // print(text);
+  tft.print("Connected!");
+
+
+}
+
+void drawBitmap(int16_t x, int16_t y, const uint16_t *bitmap, int16_t w, int16_t h, uint16_t color) {
 
   int16_t i, j, byteWidth = (w + 7) / 8;
   uint8_t byte;
 
-  for(j=0; j<h; j++) {
-    for(i=0; i<w; i++) {
-      if(i & 7) byte <<= 1;
+  for (j = 0; j < h; j++) {
+    for (i = 0; i < w; i++) {
+      if (i & 7) byte <<= 1;
       else      byte   = pgm_read_byte(bitmap + j * byteWidth + i / 8);
-      if(byte & 0x80) tft.drawPixel(x+i, y+j, color);
+      if (byte & 0x80) tft.drawPixel(x + i, y + j, color);
     }
   }
 }
